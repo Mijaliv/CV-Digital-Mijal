@@ -143,10 +143,17 @@ const PortfolioTitle = styled.h3`
   font-size: 1.4rem; // Mobile font size
   font-weight: 700;
   color: ${props => props.theme.titleColor};
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
   @media (min-width: 768px) {
       font-size: 1.6rem;
   }
+`;
+
+const ProjectDate = styled.p`
+  font-size: 0.85rem;
+  font-style: italic;
+  color: ${props => props.theme.fontColor}99; // Lighter font color
+  margin-bottom: 1rem;
 `;
 
 const PortfolioDescription = styled.p`
@@ -177,12 +184,40 @@ const Tag = styled.span`
 
 const portfolioData = [
   {
+    title: 'RootNetwork: Blog para Aficionados a las Plantas',
+    description: 'Proyecto final de carrera (6 meses, 2024). Un blog completo para entusiastas de la flora, con interfaces para usuarios y gestión de publicaciones. Desarrollado con una arquitectura full-stack moderna utilizando .NET y Entity Framework para el backend, y React para un front-end dinámico y reactivo, todo sobre una base de datos MySQL.',
+    image: process.env.PUBLIC_URL + '/rootnetwork.png',
+    liveLink: 'https://mijaliv.github.io/ingenieria/',
+    codeLink: 'https://github.com/Mijaliv/ingenieria.git',
+    tags: ['.NET', 'Entity Framework', 'React', 'MySQL'],
+    date: 'Mayo - Diciembre, 2024'
+  },
+  {
+    title: 'Análisis de Mercado Laboral con Python',
+    description: 'Herramienta de web scraping desarrollada en Python con BeautifulSoup para extraer y analizar datos de ofertas laborales del portal CompuTrabajo. El script recopila información clave como roles, salarios, y tecnologías requeridas, permitiendo un análisis detallado de las tendencias del mercado TI.',
+    image: process.env.PUBLIC_URL + '/scraping.png',
+    liveLink: 'https://mijaliv.github.io/Scrap/',
+    codeLink: 'https://github.com/Mijaliv/Scrap.git',
+    tags: ['Python', 'BeautifulSoup', 'Web Scraping'],
+    date: 'Septiembre - Noviembre, 2024'
+  },
+  {
+    title: 'Sistema de Gestión de Personal y Oficinas',
+    description: 'Aplicación full-stack para la administración de empleados y oficinas, construida con Node.js y Express. Permite realizar operaciones CRUD (Crear, Leer, Actualizar, Borrar) completas para ambas entidades. El front-end utiliza EJS para la renderización dinámica de vistas, demostrando una arquitectura web robusta y escalable.',
+    image: process.env.PUBLIC_URL + '/management.png',
+    liveLink: 'https://mijaliv.github.io/tpfpractica/',
+    codeLink: 'https://github.com/Mijaliv/tpfpractica.git',
+    tags: ['JavaScript', 'Node.js', 'Express', 'EJS'],
+    date: 'Septiembre - Diciembre, 2023'
+  },
+  {
     title: 'Buscador de Gifs',
     description: 'Una aplicación web para buscar gifs, construida para la materia de Práctica Profesionalizante I.',
     image: process.env.PUBLIC_URL + '/gif-search.png',
     liveLink: 'https://mijaliv.github.io/BuscadordeGifsMijal/',
     codeLink: 'https://github.com/Mijaliv/BuscadordeGifsMijal',
-    tags: ['HTML', 'CSS', 'JavaScript']
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    date: 'Mayo, 2023 (2 semanas)'
   },
   {
     title: 'Calculadora',
@@ -190,31 +225,8 @@ const portfolioData = [
     image: process.env.PUBLIC_URL + '/calculator.png',
     liveLink: 'https://mijaliv.github.io/calculadora/',
     codeLink: 'https://github.com/Mijaliv/calculadora',
-    tags: ['HTML', 'CSS', 'JavaScript']
-  },
-  {
-    title: 'Análisis de Mercado Laboral con Python',
-    description: 'Herramienta de web scraping desarrollada en Python con BeautifulSoup para extraer y analizar datos de ofertas laborales del portal CompuTrabajo. El script recopila información clave como roles, salarios, y tecnologías requeridas, permitiendo un análisis detallado de las tendencias del mercado TI.',
-    image: process.env.PUBLIC_URL + '/scraping.png',
-    liveLink: null,
-    codeLink: 'https://github.com/Mijaliv/Scrap.git',
-    tags: ['Python', 'BeautifulSoup', 'Web Scraping']
-  },
-  {
-    title: 'Sistema de Gestión de Personal y Oficinas',
-    description: 'Aplicación full-stack para la administración de empleados y oficinas, construida con Node.js y Express. Permite realizar operaciones CRUD (Crear, Leer, Actualizar, Borrar) completas para ambas entidades. El front-end utiliza EJS para la renderización dinámica de vistas, demostrando una arquitectura web robusta y escalable.',
-    image: process.env.PUBLIC_URL + '/management.png',
-    liveLink: null,
-    codeLink: 'https://github.com/Mijaliv/tpfpractica.git',
-    tags: ['JavaScript', 'Node.js', 'Express', 'EJS']
-  },
-  {
-    title: 'RootNetwork: Blog para Aficionados a las Plantas',
-    description: 'Proyecto final de carrera (6 meses, 2024). Un blog completo para entusiastas de la flora, con interfaces para usuarios y gestión de publicaciones. Desarrollado con una arquitectura full-stack moderna utilizando .NET y Entity Framework para el backend, y React para un front-end dinámico y reactivo, todo sobre una base de datos MySQL.',
-    image: process.env.PUBLIC_URL + '/rootnetwork.png',
-    liveLink: null,
-    codeLink: null,
-    tags: ['.NET', 'Entity Framework', 'React', 'MySQL']
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    date: 'Abril, 2023 (1 mes)'
   }
 ];
 
@@ -235,6 +247,7 @@ const PortfolioProject = ({ project, index }) => {
           </PortfolioImageContainer>
           <PortfolioInfo>
             <PortfolioTitle>{project.title}</PortfolioTitle>
+            <ProjectDate>{project.date}</ProjectDate>
             <PortfolioDescription>{project.description}</PortfolioDescription>
             <TechTags>
               {project.tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
