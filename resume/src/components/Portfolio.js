@@ -179,7 +179,7 @@ const portfolioData = [
   {
     title: 'Buscador de Gifs',
     description: 'Una aplicación web para buscar gifs, construida para la materia de Práctica Profesionalizante I.',
-    image: '/gif-search.png',
+    image: process.env.PUBLIC_URL + '/gif-search.png',
     liveLink: 'https://mijaliv.github.io/BuscadordeGifsMijal/',
     codeLink: 'https://github.com/Mijaliv/BuscadordeGifsMijal',
     tags: ['HTML', 'CSS', 'JavaScript']
@@ -187,7 +187,7 @@ const portfolioData = [
   {
     title: 'Calculadora',
     description: 'Creación de una calculadora funcional con un diseño limpio y moderno utilizando tecnologías web estándar.',
-    image: '/calculator.png',
+    image: process.env.PUBLIC_URL + '/calculator.png',
     liveLink: 'https://mijaliv.github.io/calculadora/',
     codeLink: 'https://github.com/Mijaliv/calculadora',
     tags: ['HTML', 'CSS', 'JavaScript']
@@ -195,7 +195,7 @@ const portfolioData = [
   {
     title: 'Análisis de Mercado Laboral con Python',
     description: 'Herramienta de web scraping desarrollada en Python con BeautifulSoup para extraer y analizar datos de ofertas laborales del portal CompuTrabajo. El script recopila información clave como roles, salarios, y tecnologías requeridas, permitiendo un análisis detallado de las tendencias del mercado TI.',
-    image: '/scraping.png',
+    image: process.env.PUBLIC_URL + '/scraping.png',
     liveLink: null,
     codeLink: 'https://github.com/Mijaliv/Scrap.git',
     tags: ['Python', 'BeautifulSoup', 'Web Scraping']
@@ -203,7 +203,7 @@ const portfolioData = [
   {
     title: 'Sistema de Gestión de Personal y Oficinas',
     description: 'Aplicación full-stack para la administración de empleados y oficinas, construida con Node.js y Express. Permite realizar operaciones CRUD (Crear, Leer, Actualizar, Borrar) completas para ambas entidades. El front-end utiliza EJS para la renderización dinámica de vistas, demostrando una arquitectura web robusta y escalable.',
-    image: '/management.png',
+    image: process.env.PUBLIC_URL + '/management.png',
     liveLink: null,
     codeLink: 'https://github.com/Mijaliv/tpfpractica.git',
     tags: ['JavaScript', 'Node.js', 'Express', 'EJS']
@@ -211,7 +211,7 @@ const portfolioData = [
   {
     title: 'RootNetwork: Blog para Aficionados a las Plantas',
     description: 'Proyecto final de carrera (6 meses, 2024). Un blog completo para entusiastas de la flora, con interfaces para usuarios y gestión de publicaciones. Desarrollado con una arquitectura full-stack moderna utilizando .NET y Entity Framework para el backend, y React para un front-end dinámico y reactivo, todo sobre una base de datos MySQL.',
-    image: '/rootnetwork.png',
+    image: process.env.PUBLIC_URL + '/rootnetwork.png',
     liveLink: null,
     codeLink: null,
     tags: ['.NET', 'Entity Framework', 'React', 'MySQL']

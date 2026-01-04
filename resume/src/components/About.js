@@ -84,7 +84,7 @@ const About = () => {
 
   return (
     <AboutContainer id="about" ref={ref} className={inView ? 'visible' : ''}>
-      <ProfileImage src="/profile.png" alt="Profile Picture" />
+      <ProfileImage src={process.env.PUBLIC_URL + "/profile.png"} alt="Profile Picture" />
       <TextContainer>
         <Title>Resumen Profesional</Title>
         <Summary>
