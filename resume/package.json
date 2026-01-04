@@ -1,6 +1,6 @@
 {
-  "homepage": "https://Mijaliv.github.io/CvHTML",
   "name": "resume",
+  "homepage": "https://Mijaliv.github.io/CvHTML",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

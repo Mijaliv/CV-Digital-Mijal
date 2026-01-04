@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { FaSun, FaMoon, FaBars, FaTimes } from 'react-icons/fa';
@@ -24,10 +23,21 @@ const HeaderContainer = styled.header`
   justify-content: space-between;
   align-items: center;
   animation: ${fadeInDown} 0.8s ease-out;
-  background: ${props => props.theme.headerBg}E6; // Apply 90% opacity for blur effect
+  
+  // Always apply translucent background
+  background: ${props => props.theme.headerBg}E6;
   backdrop-filter: blur(10px);
+  
   transition: box-shadow 0.3s ease, border-bottom 0.3s ease;
   border-bottom: 1px solid transparent;
+
+  // When the mobile menu is open, its overlay provides the blur effect.
+  // We disable the header's blur to prevent rendering conflicts on mobile.
+  ${props => props.isMenuOpen && `
+    @media (max-width: 767px) {
+      backdrop-filter: none;
+    }
+  `}
 
   &.scrolled {
     box-shadow: ${props => props.theme.shadow};
@@ -35,7 +45,7 @@ const HeaderContainer = styled.header`
   }
 
   @media (min-width: 768px) {
-      padding: 1rem 3rem;
+    padding: 1rem 3rem;
   }
 `;
 
@@ -63,7 +73,7 @@ const Nav = styled.nav`
     
     // Modern blurred background overlay
     background: ${props => props.theme.headerBg}E6; // 90% opacity
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px); // This is needed for the full-screen overlay
     
     // Flexbox for perfect centering
     flex-direction: column;
@@ -87,7 +97,7 @@ const Nav = styled.nav`
     width: auto;
     height: auto;
     background: none;
-    backdrop-filter: none;
+    backdrop-filter: none; // Desktop nav doesn't need its own filter
     flex-direction: row;
     opacity: 1;
     visibility: visible;
@@ -191,7 +201,7 @@ const Header = ({ toggleTheme, currentTheme }) => {
   }
 
   return (
-    <HeaderContainer className={scrolled ? 'scrolled' : ''}>
+    <HeaderContainer className={scrolled ? 'scrolled' : ''} isMenuOpen={isMenuOpen}>
       <Name>Mijal Nuñez</Name>
       
       <Nav isOpen={isMenuOpen}>
