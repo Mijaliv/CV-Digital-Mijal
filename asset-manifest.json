@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/CV-Digital-Mijal/static/css/main.e6c13ad2.css",
-    "main.js": "/CV-Digital-Mijal/static/js/main.24ef3441.js",
+    "main.js": "/CV-Digital-Mijal/static/js/main.dc635976.js",
     "static/js/453.6d77a686.chunk.js": "/CV-Digital-Mijal/static/js/453.6d77a686.chunk.js",
     "index.html": "/CV-Digital-Mijal/index.html",
     "main.e6c13ad2.css.map": "/CV-Digital-Mijal/static/css/main.e6c13ad2.css.map",
-    "main.24ef3441.js.map": "/CV-Digital-Mijal/static/js/main.24ef3441.js.map",
+    "main.dc635976.js.map": "/CV-Digital-Mijal/static/js/main.dc635976.js.map",
     "453.6d77a686.chunk.js.map": "/CV-Digital-Mijal/static/js/453.6d77a686.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.24ef3441.js"
+    "static/js/main.dc635976.js"
   ]
 }
