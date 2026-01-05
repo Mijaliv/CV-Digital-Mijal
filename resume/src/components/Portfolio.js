@@ -187,8 +187,8 @@ const portfolioData = [
     title: 'RootNetwork: Blog para Aficionados a las Plantas',
     description: 'Proyecto final de carrera (6 meses, 2024). Un blog completo para entusiastas de la flora, con interfaces para usuarios y gestión de publicaciones. Desarrollado con una arquitectura full-stack moderna utilizando .NET y Entity Framework para el backend, y React para un front-end dinámico y reactivo, todo sobre una base de datos MySQL.',
     image: process.env.PUBLIC_URL + '/rootnetwork.png',
-    liveLink: 'https://mijaliv.github.io/ingenieria/',
-    codeLink: 'https://github.com/Mijaliv/ingenieria.git',
+    liveLink: 'https://mijaliv.github.io/Blog-RootNetwork/',
+    codeLink: 'https://github.com/Mijaliv/Blog-RootNetwork.git',
     tags: ['.NET', 'Entity Framework', 'React', 'MySQL'],
     date: 'Mayo - Diciembre, 2024'
   },
