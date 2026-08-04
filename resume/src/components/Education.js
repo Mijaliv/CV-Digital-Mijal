@@ -1,6 +1,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const EducationContainer = styled.section`
   padding: 6rem 3rem;
@@ -44,22 +45,22 @@ const Description = styled.ul`
 `;
 
 const Education = () => {
+  const { t } = useLanguage();
+
   return (
     <EducationContainer id="education">
-      <Title>Formación Académica</Title>
-      <EducationItem>
-        <Degree>DESARROLLO DE SOFTWARE</Degree>
-        <Institution>Instituto Técnico Superior Córdoba (ITSC), Córdoba, Argentina | 03/2022 – 07/2024</Institution>
-        <Description>
-          <li>Proyectos Destacados: Desarrollé automatizaciones web con Selenium y Python. Creé APIs web en Node.js con Express.js y Docker. Implementé APIs web con .NET y C#.</li>
-          <li>Conocimientos: Adquirí conocimientos en análisis, modelado y diseño de sistemas, incluyendo arquitecturas y patrones de diseño.</li>
-          <li>Lenguajes y Tecnologías: Trabajé con Python, C#, React, .NET, SQL, JavaScript, HTML y CSS, entre otros.</li>
-        </Description>
-      </EducationItem>
-      <EducationItem>
-        <Degree>ECONOMÍA Y ADMINISTRACIÓN</Degree>
-        <Institution>I.P.E.T.Y.M 246 Dr. Amadeo Sabattini | 2011 – 2017</Institution>
-      </EducationItem>
+      <Title>{t.education.title}</Title>
+      {t.education.items.map((item) => (
+        <EducationItem key={item.degree}>
+          <Degree>{item.degree}</Degree>
+          <Institution>{item.institution}</Institution>
+          {item.bullets.length > 0 && (
+            <Description>
+              {item.bullets.map((point, i) => <li key={i}>{point}</li>)}
+            </Description>
+          )}
+        </EducationItem>
+      ))}
     </EducationContainer>
   );
 };

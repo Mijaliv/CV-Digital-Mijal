@@ -2,6 +2,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useInView } from 'react-intersection-observer';
+import { useLanguage } from '../i18n/LanguageContext';
 
 // --- Keyframes for Animations ---
 const slideIn = keyframes` // Simplified for mobile-first
@@ -153,50 +154,6 @@ const Description = styled.ul`
   }
 `;
 
-const experienceData = [
-    {
-        align: 'left',
-        title: 'Voluntaria Educativa',
-        company: 'Coderdojo, Córdoba, Argentina | 06/2024 – Presente',
-        description: [
-          'Diseño y planificación de sesiones educativas para niños y adolescentes.',
-          'Impartición de talleres sobre Scratch, MicroBIT, Desarrollo Web y Móvil, entre otros.'
-        ]
-      },
-      {
-        align: 'right',
-        title: 'Desarrolladora',
-        company: 'Fabricarg, Córdoba, Argentina | 09/2024 – 11/2024',
-        description: [
-          'Participación en el desarrollo de una aplicación web para la gestión de eventos, utilizando C# .NET y SQL Server.',
-          'Implementación de una arquitectura de microservicios y en capas para garantizar la escalabilidad y el mantenimiento del código.',
-          'Desarrollo y consumo de APIs RESTful documentadas con Swagger.',
-          'Utilización de herramientas profesionales como Visual Studio y conexión segura a entornos de desarrollo mediante VPN.'
-        ]
-      },
-      {
-        align: 'left',
-        title: 'Prácticas Independientes',
-        company: 'Autodidacta | 2022 – 2024',
-        description: [
-          'Capacitación en Machine Learning con desarrollo de pipelines (Kedro/Jupyter) en KeyLab.',
-          'Formación en metodologías Design Sprint (Google) y Design Thinking (Futura Camp).',
-          'Automatización de procesos con Selenium, BeautifulSoup y Swagger.',
-          'Manejo de bases de datos SQL Server, MySQL y SQLite.',
-          'Proyecto final de 6 meses (2024): Creación del blog \'RootNetwork\' con .NET, Entity Framework, React y MySQL.'
-        ]
-      },
-      {
-        align: 'right',
-        title: 'Recepcionista',
-        company: 'Lencería y Ropa de Mujer | 01/2019 – 03/2022',
-        description: [
-          'Atención al público y gestión de ventas mediante software ERP.',
-          'Coordinación de la preparación de pedidos y logística de entregas.'
-        ]
-      }
-];
-
 const TimelineItem = ({ item }) => {
     const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
     // For desktop, `align` is used. Mobile items don't need a specific alignment class.
@@ -206,7 +163,7 @@ const TimelineItem = ({ item }) => {
                 <JobTitle>{item.title}</JobTitle>
                 <Company>{item.company}</Company>
                 <Description>
-                    {item.description.map((point, i) => <li key={i}>{point}</li>)}
+                    {item.bullets.map((point, i) => <li key={i}>{point}</li>)}
                 </Description>
             </TimelineContent>
         </TimelineItemWrapper>
@@ -214,11 +171,13 @@ const TimelineItem = ({ item }) => {
 }
 
 const Experience = () => {
+  const { t } = useLanguage();
+
   return (
     <ExperienceContainer id="experience">
-      <Title>Experiencia Laboral</Title>
+      <Title>{t.experience.title}</Title>
       <Timeline>
-        {experienceData.map((item, index) => <TimelineItem item={item} key={index} />)}
+        {t.experience.items.map((item, index) => <TimelineItem item={item} key={index} />)}
       </Timeline>
     </ExperienceContainer>
   );

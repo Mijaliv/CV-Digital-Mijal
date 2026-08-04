@@ -1,13 +1,9 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useInView } from 'react-intersection-observer';
-import { 
-    FaPython, FaJs, FaReact, FaHtml5, FaCss3Alt, FaBootstrap, FaNodeJs, FaGitAlt, FaDocker, FaDatabase, FaCode 
-} from 'react-icons/fa';
-import { 
-    SiDotnet, SiSqlite, SiMysql, SiExpress, SiSelenium, SiSwagger, SiOdoo 
-} from 'react-icons/si';
+import { useLanguage } from '../i18n/LanguageContext';
+import skillsData from '../data/skills';
 
 const popIn = keyframes`
   from { opacity: 0; transform: scale(0.8); }
@@ -27,10 +23,36 @@ const Title = styled.h2`
   font-weight: 800;
   color: ${props => props.theme.titleColor};
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
   @media (min-width: 768px) {
     font-size: 2.8rem;
-    margin-bottom: 5rem;
+  }
+`;
+
+const FilterRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+  @media (min-width: 768px) {
+    margin-bottom: 4rem;
+  }
+`;
+
+const FilterPill = styled.button`
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid ${props => props.theme.borderColor};
+  background-color: ${props => (props.$active ? props.theme.interactive : 'transparent')};
+  color: ${props => (props.$active ? '#fff' : props.theme.fontColor)};
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
   }
 `;
 
@@ -116,35 +138,6 @@ const SkillName = styled.p`
   text-align: center;
 `;
 
-const skillsData = {
-  backend: [
-    { name: 'Python', icon: <FaPython /> },
-    { name: 'C#', icon: <FaCode /> },
-    { name: '.NET', icon: <SiDotnet /> },
-    { name: 'Node.js', icon: <FaNodeJs /> },
-    { name: 'Express.js', icon: <SiExpress /> },
-    { name: 'SQL Server', icon: <FaDatabase /> },
-    { name: 'SQLite', icon: <SiSqlite /> },
-    { name: 'MySQL', icon: <SiMysql /> },
-    { name: 'Microservicios', icon: <FaDatabase /> }
-  ],
-  frontend: [
-    { name: 'JavaScript', icon: <FaJs /> },
-    { name: 'React.js', icon: <FaReact /> },
-    { name: 'HTML5', icon: <FaHtml5 /> },
-    { name: 'CSS3', icon: <FaCss3Alt /> },
-    { name: 'Bootstrap', icon: <FaBootstrap /> },
-  ],
-  tools: [
-    { name: 'Git', icon: <FaGitAlt /> },
-    { name: 'Docker', icon: <FaDocker /> },
-    { name: 'Selenium', icon: <SiSelenium /> },
-    { name: 'Swagger', icon: <SiSwagger /> },
-    { name: 'Visual Studio', icon: <FaCode /> },
-    { name: 'Odoo', icon: <SiOdoo /> },
-  ]
-};
-
 const SkillCategory = ({ title, skills }) => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
   return (
@@ -153,7 +146,7 @@ const SkillCategory = ({ title, skills }) => {
       {inView && (
         <SkillsGrid>
           {skills.map((skill, index) => (
-            <SkillCard key={skill.name} delay={`${index * 0.05}s`}> 
+            <SkillCard key={skill.name} delay={`${index * 0.05}s`}>
               {skill.icon}
               <SkillName>{skill.name}</SkillName>
             </SkillCard>
@@ -165,12 +158,33 @@ const SkillCategory = ({ title, skills }) => {
 };
 
 const Skills = () => {
+  const { t } = useLanguage();
+  const [activeCategory, setActiveCategory] = useState('all');
+  const categoryKeys = Object.keys(t.skills.categories);
+
   return (
     <SkillsContainer id="skills">
-      <Title>Habilidades Técnicas</Title>
-      <SkillCategory title="Backend & Bases de Datos" skills={skillsData.backend} />
-      <SkillCategory title="Frontend" skills={skillsData.frontend} />
-      <SkillCategory title="Herramientas y Tecnologías" skills={skillsData.tools} />
+      <Title>{t.skills.title}</Title>
+      <FilterRow>
+        <FilterPill $active={activeCategory === 'all'} onClick={() => setActiveCategory('all')}>
+          {t.skills.filterAll}
+        </FilterPill>
+        {categoryKeys.map((key) => (
+          <FilterPill key={key} $active={activeCategory === key} onClick={() => setActiveCategory(key)}>
+            {t.skills.categories[key]}
+          </FilterPill>
+        ))}
+      </FilterRow>
+
+      {categoryKeys
+        .filter((key) => activeCategory === 'all' || activeCategory === key)
+        .map((key) => (
+          <SkillCategory
+            key={key}
+            title={t.skills.categories[key]}
+            skills={skillsData.filter((skill) => skill.category === key)}
+          />
+        ))}
     </SkillsContainer>
   );
 };

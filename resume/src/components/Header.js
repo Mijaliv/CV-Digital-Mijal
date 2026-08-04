@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { FaSun, FaMoon, FaBars, FaTimes } from 'react-icons/fa';
+import { useLanguage } from '../i18n/LanguageContext';
 
 // --- Keyframes ---
 const fadeInDown = keyframes`
@@ -33,7 +34,7 @@ const HeaderContainer = styled.header`
 
   // When the mobile menu is open, its overlay provides the blur effect.
   // We disable the header's blur to prevent rendering conflicts on mobile.
-  ${props => props.isMenuOpen && `
+  ${props => props.$isMenuOpen && `
     @media (max-width: 767px) {
       backdrop-filter: none;
     }
@@ -84,9 +85,9 @@ const Nav = styled.nav`
 
     // Animate with a clean fade-in/out
     transition: opacity 0.3s ease, visibility 0.3s;
-    opacity: ${props => (props.isOpen ? 1 : 0)};
-    visibility: ${props => (props.isOpen ? 'visible' : 'hidden')};
-    pointer-events: ${props => (props.isOpen ? 'auto' : 'none')};
+    opacity: ${props => (props.$isOpen ? 1 : 0)};
+    visibility: ${props => (props.$isOpen ? 'visible' : 'hidden')};
+    pointer-events: ${props => (props.$isOpen ? 'auto' : 'none')};
     transform: none; // Remove transform to ensure proper centering
   }
 
@@ -165,6 +166,30 @@ const ThemeToggle = styled.button`
   }
 `;
 
+const LangToggle = styled.button`
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: 1px solid ${props => props.theme.borderColor};
+  border-radius: 20px;
+  padding: 0.2rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 700;
+
+  span {
+    padding: 0.2rem 0.6rem;
+    border-radius: 16px;
+    color: ${props => props.theme.fontColor};
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  span.active {
+    background: ${props => props.theme.interactive};
+    color: #fff;
+  }
+`;
+
 const Hamburger = styled.div`
   cursor: pointer;
   font-size: 1.5rem;
@@ -179,6 +204,7 @@ const Header = ({ toggleTheme, currentTheme }) => {
   const [scrolled, setScrolled] = useState(false);
   const [isRotating, setIsRotating] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { lang, toggleLang, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -201,18 +227,22 @@ const Header = ({ toggleTheme, currentTheme }) => {
   }
 
   return (
-    <HeaderContainer className={scrolled ? 'scrolled' : ''} isMenuOpen={isMenuOpen}>
+    <HeaderContainer className={scrolled ? 'scrolled' : ''} $isMenuOpen={isMenuOpen}>
       <Name>Mijal Nuñez</Name>
-      
-      <Nav isOpen={isMenuOpen}>
-        <NavLink href="#about" onClick={handleLinkClick}>Resumen</NavLink>
-        <NavLink href="#experience" onClick={handleLinkClick}>Experiencia</NavLink>
-        <NavLink href="#skills" onClick={handleLinkClick}>Habilidades</NavLink>
-        <NavLink href="#portfolio" onClick={handleLinkClick}>Portfolio</NavLink>
-        <NavLink href="#contact" onClick={handleLinkClick}>Contacto</NavLink>
+
+      <Nav $isOpen={isMenuOpen}>
+        <NavLink href="#about" onClick={handleLinkClick}>{t.nav.about}</NavLink>
+        <NavLink href="#experience" onClick={handleLinkClick}>{t.nav.experience}</NavLink>
+        <NavLink href="#skills" onClick={handleLinkClick}>{t.nav.skills}</NavLink>
+        <NavLink href="#portfolio" onClick={handleLinkClick}>{t.nav.portfolio}</NavLink>
+        <NavLink href="#contact" onClick={handleLinkClick}>{t.nav.contact}</NavLink>
       </Nav>
 
       <ControlsContainer>
+        <LangToggle onClick={toggleLang} aria-label="Toggle language">
+          <span className={lang === 'es' ? 'active' : ''}>ES</span>
+          <span className={lang === 'en' ? 'active' : ''}>EN</span>
+        </LangToggle>
         <ThemeToggle onClick={handleThemeToggle} className={isRotating ? 'rotating' : ''} aria-label="Toggle theme">
           {currentTheme === 'light' ? <FaMoon /> : <FaSun />}
         </ThemeToggle>

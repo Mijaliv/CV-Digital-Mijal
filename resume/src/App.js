@@ -11,6 +11,7 @@ import Portfolio from './components/Portfolio';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
 import { lightTheme, darkTheme } from './theme';
+import { LanguageProvider } from './i18n/LanguageContext';
 
 const GlobalStyle = createGlobalStyle`
   *, *::before, *::after {
@@ -57,20 +58,22 @@ function App() {
   };
 
   return (
-    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-      <GlobalStyle />
-      <CustomCursor />
-      <AppContainer>
-        <Header toggleTheme={toggleTheme} currentTheme={theme} />
-        <About />
-        <Contact />
-        <Experience />
-        <Education />
-        <Skills />
-        <Portfolio />
-        <Footer />
-      </AppContainer>
-    </ThemeProvider>
+    <LanguageProvider>
+      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+        <GlobalStyle />
+        <CustomCursor />
+        <AppContainer>
+          <Header toggleTheme={toggleTheme} currentTheme={theme} />
+          <About />
+          <Contact />
+          <Experience />
+          <Education />
+          <Skills />
+          <Portfolio />
+          <Footer />
+        </AppContainer>
+      </ThemeProvider>
+    </LanguageProvider>
   );
 }
 

@@ -1,8 +1,10 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useInView } from 'react-intersection-observer';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { useLanguage } from '../i18n/LanguageContext';
+import portfolioMeta from '../data/portfolioMeta';
 
 const popIn = keyframes`
   from { opacity: 0; transform: scale(0.9); }
@@ -26,6 +28,33 @@ const Title = styled.h2`
   @media (min-width: 768px) {
     font-size: 2.8rem;
     margin-bottom: 5rem;
+  }
+`;
+
+const FilterRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+  @media (min-width: 768px) {
+    margin-bottom: 4rem;
+  }
+`;
+
+const FilterPill = styled.button`
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid ${props => props.theme.borderColor};
+  background-color: ${props => (props.$active ? props.theme.interactive : 'transparent')};
+  color: ${props => (props.$active ? '#fff' : props.theme.fontColor)};
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
   }
 `;
 
@@ -149,6 +178,18 @@ const PortfolioTitle = styled.h3`
   }
 `;
 
+const CategoryBadge = styled.span`
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0.25rem 0.7rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  background-color: ${props => props.theme.interactive};
+  margin-bottom: 0.8rem;
+`;
+
 const ProjectDate = styled.p`
   font-size: 0.85rem;
   font-style: italic;
@@ -182,60 +223,12 @@ const Tag = styled.span`
     font-weight: 600;
 `;
 
-const portfolioData = [
-  {
-    title: 'RootNetwork: Blog para Aficionados a las Plantas',
-    description: 'Proyecto final de carrera (6 meses, 2024). Un blog completo para entusiastas de la flora, con interfaces para usuarios y gestión de publicaciones. Desarrollado con una arquitectura full-stack moderna utilizando .NET y Entity Framework para el backend, y React para un front-end dinámico y reactivo, todo sobre una base de datos MySQL.',
-    image: process.env.PUBLIC_URL + '/rootnetwork.png',
-    liveLink: 'https://mijaliv.github.io/Blog-RootNetwork/',
-    codeLink: 'https://github.com/Mijaliv/Blog-RootNetwork.git',
-    tags: ['.NET', 'Entity Framework', 'React', 'MySQL'],
-    date: 'Mayo - Diciembre, 2024'
-  },
-  {
-    title: 'Análisis de Mercado Laboral con Python',
-    description: 'Herramienta de web scraping desarrollada en Python con BeautifulSoup para extraer y analizar datos de ofertas laborales del portal CompuTrabajo. El script recopila información clave como roles, salarios, y tecnologías requeridas, permitiendo un análisis detallado de las tendencias del mercado TI.',
-    image: process.env.PUBLIC_URL + '/scraping.png',
-    liveLink: 'https://mijaliv.github.io/Scrap/',
-    codeLink: 'https://github.com/Mijaliv/Scrap.git',
-    tags: ['Python', 'BeautifulSoup', 'Web Scraping'],
-    date: 'Septiembre - Noviembre, 2024'
-  },
-  {
-    title: 'Sistema de Gestión de Personal y Oficinas',
-    description: 'Aplicación full-stack para la administración de empleados y oficinas, construida con Node.js y Express. Permite realizar operaciones CRUD (Crear, Leer, Actualizar, Borrar) completas para ambas entidades. El front-end utiliza EJS para la renderización dinámica de vistas, demostrando una arquitectura web robusta y escalable.',
-    image: process.env.PUBLIC_URL + '/management.png',
-    liveLink: 'https://mijaliv.github.io/tpfpractica/',
-    codeLink: 'https://github.com/Mijaliv/tpfpractica.git',
-    tags: ['JavaScript', 'Node.js', 'Express', 'EJS'],
-    date: 'Septiembre - Diciembre, 2023'
-  },
-  {
-    title: 'Buscador de Gifs',
-    description: 'Una aplicación web para buscar gifs, construida para la materia de Práctica Profesionalizante I.',
-    image: process.env.PUBLIC_URL + '/gif-search.png',
-    liveLink: 'https://mijaliv.github.io/BuscadordeGifsMijal/',
-    codeLink: 'https://github.com/Mijaliv/BuscadordeGifsMijal',
-    tags: ['HTML', 'CSS', 'JavaScript'],
-    date: 'Mayo, 2023 (2 semanas)'
-  },
-  {
-    title: 'Calculadora',
-    description: 'Creación de una calculadora funcional con un diseño limpio y moderno utilizando tecnologías web estándar.',
-    image: process.env.PUBLIC_URL + '/calculator.png',
-    liveLink: 'https://mijaliv.github.io/calculadora/',
-    codeLink: 'https://github.com/Mijaliv/calculadora',
-    tags: ['HTML', 'CSS', 'JavaScript'],
-    date: 'Abril, 2023 (1 mes)'
-  }
-];
-
 const PortfolioProject = ({ project, index }) => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
   return (
     <div ref={ref}>
       {inView && (
-        <PortfolioCard delay={`${index * 0.1}s`}> 
+        <PortfolioCard delay={`${index * 0.1}s`}>
           <PortfolioImageContainer>
             <PortfolioImage src={project.image} alt={project.title} />
             <PortfolioOverlay>
@@ -246,6 +239,7 @@ const PortfolioProject = ({ project, index }) => {
             </PortfolioOverlay>
           </PortfolioImageContainer>
           <PortfolioInfo>
+            <CategoryBadge>{project.categoryLabel}</CategoryBadge>
             <PortfolioTitle>{project.title}</PortfolioTitle>
             <ProjectDate>{project.date}</ProjectDate>
             <PortfolioDescription>{project.description}</PortfolioDescription>
@@ -260,12 +254,35 @@ const PortfolioProject = ({ project, index }) => {
 };
 
 const Portfolio = () => {
+  const { t } = useLanguage();
+  const [activeCategory, setActiveCategory] = useState('all');
+  const categoryKeys = Object.keys(t.skills.categories);
+
+  const projects = portfolioMeta.map((meta) => {
+    const text = t.portfolio.items.find((item) => item.id === meta.id);
+    return { ...meta, ...text, categoryLabel: t.skills.categories[meta.category] };
+  });
+
+  const visibleProjects = projects.filter(
+    (project) => activeCategory === 'all' || project.category === activeCategory
+  );
+
   return (
     <PortfolioContainer id="portfolio">
-      <Title>Portfolio</Title>
+      <Title>{t.portfolio.title}</Title>
+      <FilterRow>
+        <FilterPill $active={activeCategory === 'all'} onClick={() => setActiveCategory('all')}>
+          {t.portfolio.filterAll}
+        </FilterPill>
+        {categoryKeys.map((key) => (
+          <FilterPill key={key} $active={activeCategory === key} onClick={() => setActiveCategory(key)}>
+            {t.skills.categories[key]}
+          </FilterPill>
+        ))}
+      </FilterRow>
       <PortfolioGrid>
-        {portfolioData.map((project, index) => (
-          <PortfolioProject project={project} index={index} key={index} />
+        {visibleProjects.map((project, index) => (
+          <PortfolioProject project={project} index={index} key={project.id} />
         ))}
       </PortfolioGrid>
     </PortfolioContainer>

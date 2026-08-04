@@ -2,6 +2,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useInView } from 'react-intersection-observer';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(50px); }
@@ -79,23 +80,43 @@ const Summary = styled.p`
   }
 `;
 
+const RolesRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+
+  @media (min-width: 768px) {
+    justify-content: flex-start;
+  }
+`;
+
+const RolePill = styled.span`
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: ${props => props.theme.interactive};
+  background-color: ${props => props.theme.highlight};
+  border: 1px solid ${props => props.theme.borderColor};
+`;
+
 const About = () => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
+  const { t } = useLanguage();
 
   return (
     <AboutContainer id="about" ref={ref} className={inView ? 'visible' : ''}>
       <ProfileImage src={process.env.PUBLIC_URL + "/profile.png"} alt="Profile Picture" />
       <TextContainer>
-        <Title>Resumen Profesional</Title>
-        <Summary>
-          Soy recientemente egresada en desarrollo de software con titulo y analitico en mano. Tengo experiencia en la creación de aplicaciones web,
-          arquitecturas backend siguiendo MVC y APIs RESTful.
-          Programe en lenguajes como Python, C#, SQL y JavaScript
-          como también use frameworks .Net, node.js, React.
-          He trabajado con metodologías ágiles, participando en
-          proyectos de Scraping y capacitaciones en Machine
-          Learning. Busco aportar mis habilidades al sector IT.
-        </Summary>
+        <Title>{t.about.title}</Title>
+        <RolesRow>
+          {t.about.roles.map((role) => (
+            <RolePill key={role}>{role}</RolePill>
+          ))}
+        </RolesRow>
+        <Summary>{t.about.summary}</Summary>
       </TextContainer>
     </AboutContainer>
   );

@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { useInView } from 'react-intersection-observer';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const FooterContainer = styled.footer`
   background-color: ${props => props.theme.headerBg};
@@ -78,11 +79,12 @@ const FooterText = styled.p`
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
+  const { t } = useLanguage();
 
   return (
     <FooterContainer ref={ref} className={inView ? 'visible' : ''}>
         <FooterContent>
-            <FooterText>&copy; {currentYear} Mijal Nuñez. Todos los derechos reservados.</FooterText>
+            <FooterText>&copy; {currentYear} Mijal Nuñez. {t.footer.rights}</FooterText>
             <SocialLinks>
                 <SocialLink href="https://github.com/Mijaliv" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><FaGithub /></SocialLink>
                 <SocialLink href="https://linkedin.com/in/mijalnunez" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedin /></SocialLink>

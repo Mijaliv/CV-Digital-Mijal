@@ -3,6 +3,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { FaPhone, FaEnvelope, FaLinkedin, FaMapMarkerAlt } from 'react-icons/fa';
 import { useInView } from 'react-intersection-observer';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(50px); }
@@ -92,14 +93,15 @@ const ContactItem = styled.a`
 
 const Contact = () => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
+  const { t } = useLanguage();
 
   return (
     <ContactContainer id="contact" ref={ref} className={inView ? 'visible' : ''}>
-      <Title>Información de Contacto</Title>
+      <Title>{t.contact.title}</Title>
       <ContactGrid>
         <ContactItem href="#" onClick={(e) => e.preventDefault()}> {/* Make non-link item not jump */}
           <FaMapMarkerAlt />
-          <span>Córdoba, Argentina</span>
+          <span>{t.contact.location}</span>
         </ContactItem>
         <ContactItem href="tel:+5493517478608">
           <FaPhone />
