@@ -1,6 +1,14 @@
 // language-independent project data; translated title/description/date live in src/i18n/es.js and en.js, matched by id
 const portfolioMeta = [
   {
+    id: 'chopchop-huellitas',
+    image: process.env.PUBLIC_URL + '/chopchop-huellitas.jpeg',
+    liveLink: 'https://mijaliv.github.io/ChopChopHuellitas/',
+    codeLink: 'https://github.com/Mijaliv/ChopChopHuellitas',
+    tags: ['Playwright', 'TypeScript', 'POM', 'CI/CD'],
+    category: 'qa',
+  },
+  {
     id: 'catalogo-empresas',
     image: process.env.PUBLIC_URL + '/catalogo-empresas.png',
     liveLink: 'https://mijaliv.github.io/Catalogo-de-Empresas-Provincia-de-Cordoba/',

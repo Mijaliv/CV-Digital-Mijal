@@ -100,6 +100,13 @@ const es = {
     filterAll: 'Todos',
     items: [
       {
+        id: 'chopchop-huellitas',
+        title: 'ChopChop Huellitas | Portafolio de QA & Test Automation',
+        description:
+          'Proyecto de portafolio de QA: documentación completa bajo estándar Agile/IEEE 829 (Test Plan, matriz de 16 casos de prueba con Partición de Equivalencia y BVA, reportes de bugs y organización en Jira) más un framework de automatización E2E real con Playwright, TypeScript y Page Object Model. Incluye una mini aplicación de referencia para que los 28 tests (14 casos × 2 navegadores) corran de verdad en cada push, con CI en GitHub Actions.',
+        date: 'Agosto, 2026',
+      },
+      {
         id: 'catalogo-empresas',
         title: 'Catálogo de Empresas | Provincia de Córdoba',
         description:

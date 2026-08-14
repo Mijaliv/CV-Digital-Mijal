@@ -100,6 +100,13 @@ const en = {
     filterAll: 'All',
     items: [
       {
+        id: 'chopchop-huellitas',
+        title: 'ChopChop Huellitas | QA & Test Automation Portfolio',
+        description:
+          'A QA portfolio project: full documentation under the Agile/IEEE 829 standard (Test Plan, a 16-case test matrix using Equivalence Partitioning and BVA, bug reports and Jira setup) plus a real E2E automation framework with Playwright, TypeScript and Page Object Model. Includes a reference mock app so the 28 tests (14 cases × 2 browsers) actually run on every push, with CI on GitHub Actions.',
+        date: 'August, 2026',
+      },
+      {
         id: 'catalogo-empresas',
         title: 'Company Catalog | Córdoba Province',
         description:
