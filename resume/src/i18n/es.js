@@ -100,6 +100,13 @@ const es = {
     filterAll: 'Todos',
     items: [
       {
+        id: 'catalogo-empresas',
+        title: 'Catálogo de Empresas | Provincia de Córdoba',
+        description:
+          'Herramienta web independiente que centraliza la búsqueda de empleo en Córdoba, Argentina. Cataloga cerca de 18.000 empresas registradas en los programas provinciales de empleo (Empleo +26, PPP, PIL Turismo), con filtros por rubro, puesto y localidad, y copiado masivo de emails para postulaciones. Los datos se extraen y procesan con Python (Playwright y Pandas) y se integran en una interfaz HTML/JavaScript.',
+        date: 'Agosto, 2026',
+      },
+      {
         id: 'rootnetwork',
         title: 'RootNetwork: Blog para Aficionados a las Plantas',
         description:

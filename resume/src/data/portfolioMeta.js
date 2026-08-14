@@ -1,6 +1,14 @@
 // language-independent project data; translated title/description/date live in src/i18n/es.js and en.js, matched by id
 const portfolioMeta = [
   {
+    id: 'catalogo-empresas',
+    image: process.env.PUBLIC_URL + '/catalogo-empresas.png',
+    liveLink: 'https://mijaliv.github.io/Catalogo-de-Empresas-Provincia-de-Cordoba/',
+    codeLink: 'https://github.com/Mijaliv/Catalogo-de-Empresas-Provincia-de-Cordoba',
+    tags: ['Python', 'Playwright', 'Pandas', 'JavaScript'],
+    category: 'data',
+  },
+  {
     id: 'rootnetwork',
     image: process.env.PUBLIC_URL + '/rootnetwork.png',
     liveLink: 'https://mijaliv.github.io/Blog-RootNetwork/',

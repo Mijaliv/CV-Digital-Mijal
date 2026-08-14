@@ -100,6 +100,13 @@ const en = {
     filterAll: 'All',
     items: [
       {
+        id: 'catalogo-empresas',
+        title: 'Company Catalog | Córdoba Province',
+        description:
+          'An independent web tool that centralizes the job search in Córdoba, Argentina. It catalogs nearly 18,000 companies registered in the province\'s employment programs (Empleo +26, PPP, PIL Turismo), with filters by industry, position and location, plus bulk email copying for job applications. Data is extracted and processed with Python (Playwright and Pandas) and embedded into an HTML/JavaScript interface.',
+        date: 'August, 2026',
+      },
+      {
         id: 'rootnetwork',
         title: 'RootNetwork: Blog for Plant Enthusiasts',
         description:
