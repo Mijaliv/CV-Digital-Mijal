@@ -1,6 +1,14 @@
 // language-independent project data; translated title/description/date live in src/i18n/es.js and en.js, matched by id
 const portfolioMeta = [
   {
+    id: 'fintech-gamificada',
+    image: process.env.PUBLIC_URL + '/fintech-gamificada.png',
+    liveLink: 'https://mijaliv.github.io/Fintech-Gamificada/',
+    codeLink: 'https://github.com/Mijaliv/Fintech-Gamificada',
+    tags: ['Figma', 'UX Research', 'Design System', 'Dark Mode'],
+    category: 'uxui',
+  },
+  {
     id: 'chopchop-huellitas',
     image: process.env.PUBLIC_URL + '/chopchop-huellitas.jpeg',
     liveLink: 'https://mijaliv.github.io/ChopChopHuellitas/',

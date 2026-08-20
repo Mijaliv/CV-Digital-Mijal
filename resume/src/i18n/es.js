@@ -100,6 +100,13 @@ const es = {
     filterAll: 'Todos',
     items: [
       {
+        id: 'fintech-gamificada',
+        title: 'Fintech Gamificada | Rediseño UX/UI End-to-End',
+        description:
+          'Caso de estudio de UX/UI: rediseño integral de una app de billetera virtual e inversión (cripto y bolsa) para Generación Z. Incluye investigación (User Persona y User Journey Map con puntos de dolor identificados), wireframes de baja fidelidad, interfaz de alta fidelidad en dark mode con gráficos de gradiente neón, Design System completo y un prototipo con micro-interacciones reales (toggle de saldo, confirmación de transferencia).',
+        date: 'Agosto, 2026',
+      },
+      {
         id: 'chopchop-huellitas',
         title: 'ChopChop Huellitas | Portafolio de QA & Test Automation',
         description:
